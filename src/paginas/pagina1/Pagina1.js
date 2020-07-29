@@ -7,7 +7,7 @@ class Pagina1 extends React.Component{
         return(
             <div>
                 <Navegador></Navegador>
-                <ContainerPagina1></ContainerPagina1>                
+                <ContainerPagina1></ContainerPagina1>
             </div>            
         )        
     }
