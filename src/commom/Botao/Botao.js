@@ -1,4 +1,5 @@
 import React from 'react';
+import './Botao.css';
 
 class Botao extends React.Component{
 
@@ -14,7 +15,7 @@ class Botao extends React.Component{
 
     render(){
         return(
-            <button
+            <button class="botao-verde"
                 onClick={this.foiClicado}
             >Me clique</button>
         )
