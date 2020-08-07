@@ -1,0 +1,26 @@
+.navegador-principal{
+    background-color: rgb(200,200,200);
+    display: flex;
+}
+
+.navegador-principal .logo{
+    display: block;
+    padding: 14px;
+}
+
+.navegador-principal a{
+    display: block;
+    text-decoration: none;
+    color: black;
+    padding: 14px;
+}
+
+.navegador-principal .active {
+    background-color: rgb(160,160,160);
+}
+
+.navegador-principal a:hover{
+    background-color: rgb(180,180,180);
+}
+
+
