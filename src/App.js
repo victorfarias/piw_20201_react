@@ -7,6 +7,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Navegador from './commom/navegador/Navegador';
 import Alunos from './paginas/alunos/Alunos';
 import ListarAlunos from './paginas/ListarAlunos/ListarAlunos';
+import CadastroAluno from './paginas/CadastroAluno/CadastroAluno';
 
 function App() {
   return (
@@ -22,8 +23,8 @@ function App() {
           <Pagina2></Pagina2>
         </Route>
         <Route exact path="/alunos" component={ListarAlunos}></Route>
-        <Route path="/alunos/:matricula" component={Alunos}>         
-        </Route>        
+        <Route path="/alunoscreate" component={CadastroAluno}></Route> 
+        <Route path="/alunos/:matricula" component={Alunos}></Route>        
       </BrowserRouter>      
     </div>
   );

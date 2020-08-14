@@ -10,6 +10,7 @@ class Navegador extends React.Component{
                 <NavLink to="/pagina1">Pagina 1</NavLink>
                 <NavLink to="/pagina2">Pagina 2</NavLink>
                 <NavLink to="/alunos">Listar Alunos</NavLink>
+                <NavLink to="/alunoscreate">Listar Alunos</NavLink>
             </nav>
         )
     }
