@@ -1,0 +1,8 @@
+.tabela-alunos .delete-button {
+    background-color: red;
+    border: none;
+    padding: 3px;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+}

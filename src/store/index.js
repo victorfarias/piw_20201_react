@@ -1,6 +1,13 @@
-const { createStore } = require("redux");
-const { default: reducerRaiz } = require("../reducers");
+import { configureStore } from "@reduxjs/toolkit";
+import reducerAlunos from "../reducers/alunos";
+import { authReducer } from "../reducers/auth";
 
-const store = createStore(reducerRaiz);
+const store = configureStore ({
+    reducer : {
+        matricula: reducerAlunos,
+        auth: authReducer,
+    }
+}   
+);
 
 export default store;

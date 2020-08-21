@@ -21,7 +21,7 @@ class BotaoEstilizado extends React.Component{
 
     render(){
         return(
-            <button onClick={this.mudarClasse} class={this.state.classe}>
+            <button onClick={this.mudarClasse} className={this.state.classe}>
                 Me clique com estilo
             </button>
         )

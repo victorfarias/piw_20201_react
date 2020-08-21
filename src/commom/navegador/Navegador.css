@@ -1,5 +1,5 @@
 .navegador-principal{
-    background-color: rgb(200,200,200);
+    background-color: rgb(200,200,200);    
     display: flex;
 }
 
@@ -8,19 +8,31 @@
     padding: 14px;
 }
 
-.navegador-principal a{
+.navegador-principal a, .navegador-principal .direita button{
     display: block;
     text-decoration: none;
     color: black;
     padding: 14px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.navegador-principal .direita button{
+    padding: 15.5px;
 }
 
 .navegador-principal .active {
     background-color: rgb(160,160,160);
 }
 
-.navegador-principal a:hover{
+.navegador-principal a:hover, .navegador-principal button:hover{
     background-color: rgb(180,180,180);
 }
 
-
+.navegador-principal .esquerda{
+    flex-grow: 1;
+    display: flex;
+}

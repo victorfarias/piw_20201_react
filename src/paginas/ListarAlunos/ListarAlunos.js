@@ -2,58 +2,84 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Navegador from '../../commom/navegador/Navegador'
 import { connect } from 'react-redux'
+import './ListarAlunos.css';
+import { removerAluno } from '../../actions/alunos';
 
 export class ListarAlunos extends Component {
 
     constructor(props){
         super(props);
-        this.alunos = props.alunos;
+        console.log("constructor");
+        this.state = {
+            dados_carregados: false,
+        }
+    }
+
+    componentDidMount = () => {
+        // requisição para servidor
+        setTimeout(() => {
+            this.setState({
+                dados_carregados: true,
+            })
+        }, 3000);
+        console.log("componentDidMount");
+    }
+
+    componentDidUpdate = () => {
+        console.log("componentDidUpdate");
     }
 
     render() {
-
+        console.log("render");
+        console.log(this.props.alunos);
         let listaLinhasTabela = [];
-        for(let aluno of this.alunos){
-            let linha = (<tr>
+        for(let aluno of this.props.alunos){
+            let linha = (<tr key={aluno.matricula}>
                 <td>
                     <Link to={"/alunos/"+aluno.matricula}>{aluno.nome}</Link>
                 </td>
                 <td>
                     {aluno.matricula}
                 </td>
+                <td>
+                    <button onClick={()=>{this.props.removerAlunoprops(aluno.matricula)}} className="delete-button">x</button>
+                </td>
             </tr>)
             listaLinhasTabela.push(linha);
         }
 
+        let tabela = 
+        (<table className="tabela-alunos">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Matricula</th>
+                </tr>
+            </thead>
+            <tbody>
+                {listaLinhasTabela}
+            </tbody>
+        </table>);
+
         return (            
             <div>
                 <Navegador></Navegador>
-                <table>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Matricula</th>
-                    </tr>
-                    {listaLinhasTabela}
-                    {/* <tr>
-                        <td>
-                            <Link to="/alunos/123456">João</Link>
-                        </td>
-                        <td>123456</td>
-                    </tr>         
-                    <tr>
-                        <td>
-                            <Link to="/alunos/654321">Maria</Link>
-                        </td>
-                        <td>654321</td>
-                    </tr>                                         */}
-                </table>
+                {this.state.dados_carregados == true ? tabela : <h3>Carregando...</h3>}
             </div>
         )
     }
 }
 
 const mapearEstadoParaProps = (state, props) => {
-    return {"alunos" : state.alunos};
+    return {"alunos" : state.matricula.alunos};
 }
 
-export default connect(mapearEstadoParaProps)(ListarAlunos);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        removerAlunoprops: (matricula) => {
+            dispatch(removerAluno({matricula: matricula}));
+        }
+    }
+}
+
+export default connect(mapearEstadoParaProps, mapDispatchToProps)(ListarAlunos);

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Navegador from '../../commom/navegador/Navegador'
 import { connect } from 'react-redux'
-import { adicionarAluno } from '../../actions'
+import { adicionarAluno } from '../../actions/alunos';
+
 
 class CadastroAluno extends Component {
 

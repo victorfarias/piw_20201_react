@@ -15,7 +15,7 @@ class Botao extends React.Component{
 
     render(){
         return(
-            <button class="botao-verde"
+            <button className="botao-verde"
                 onClick={this.foiClicado}
             >Me clique</button>
         )
