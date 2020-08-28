@@ -3,49 +3,37 @@ import { Link } from 'react-router-dom'
 import Navegador from '../../commom/navegador/Navegador'
 import { connect } from 'react-redux'
 import './ListarAlunos.css';
-import { removerAluno } from '../../actions/alunos';
-
+import { removerAluno, fetchAlunos } from '../../actions/alunos';
+// /src/paginas/ListarAlunos/ListarAlunos.js
 export class ListarAlunos extends Component {
 
-    constructor(props){
-        super(props);
-        console.log("constructor");
-        this.state = {
-            dados_carregados: false,
-        }
-    }
-
     componentDidMount = () => {
-        // requisição para servidor
-        setTimeout(() => {
-            this.setState({
-                dados_carregados: true,
-            })
-        }, 3000);
-        console.log("componentDidMount");
+        this.props.fetchAlunos();
     }
 
     componentDidUpdate = () => {
         console.log("componentDidUpdate");
     }
 
-    render() {
-        console.log("render");
-        console.log(this.props.alunos);
+    render() {        
         let listaLinhasTabela = [];
-        for(let aluno of this.props.alunos){
-            let linha = (<tr key={aluno.matricula}>
-                <td>
-                    <Link to={"/alunos/"+aluno.matricula}>{aluno.nome}</Link>
-                </td>
-                <td>
-                    {aluno.matricula}
-                </td>
-                <td>
-                    <button onClick={()=>{this.props.removerAlunoprops(aluno.matricula)}} className="delete-button">x</button>
-                </td>
-            </tr>)
-            listaLinhasTabela.push(linha);
+        console.log("reder de listaralunos");
+        console.log(this.props);
+        if(this.props.alunos != null){
+            for(let aluno of this.props.alunos){
+                let linha = (<tr key={aluno.matricula}>
+                    <td>
+                        <Link to={"/alunos/"+aluno.matricula}>{aluno.nome}</Link>
+                    </td>
+                    <td>
+                        {aluno.matricula}
+                    </td>
+                    <td>
+                        <button onClick={()=>{this.props.removerAlunoprops(aluno.id)}} className="delete-button">x</button>
+                    </td>
+                </tr>)
+                listaLinhasTabela.push(linha);
+            }
         }
 
         let tabela = 
@@ -61,23 +49,28 @@ export class ListarAlunos extends Component {
             </tbody>
         </table>);
 
+        const loading = <div className="loading"></div>;
+
         return (            
             <div>
                 <Navegador></Navegador>
-                {this.state.dados_carregados == true ? tabela : <h3>Carregando...</h3>}
+                {this.props.alunos == null? loading : tabela}                
             </div>
         )
     }
 }
 
 const mapearEstadoParaProps = (state, props) => {
-    return {"alunos" : state.matricula.alunos};
+    return {alunos : state.matricula.alunos};
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        removerAlunoprops: (matricula) => {
-            dispatch(removerAluno({matricula: matricula}));
+        removerAlunoprops: (id) => {
+            dispatch(removerAluno(id));
+        },
+        fetchAlunos: () =>{
+            dispatch(fetchAlunos());
         }
     }
 }

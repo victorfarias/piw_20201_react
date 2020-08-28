@@ -6,3 +6,25 @@
     outline: none;
     cursor: pointer;
 }
+
+@keyframes rodar{
+    from {
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+.loading {
+    width: 150px;
+    height: 150px;
+    border: 30px solid rgba(200,200,200,0.7);
+    border-top: 30px solid green;
+    border-radius: 50%;
+    animation-name: rodar;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+

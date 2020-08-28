@@ -2,19 +2,18 @@ import React, { Component } from 'react'
 import Navegador from '../../commom/navegador/Navegador'
 import { connect } from 'react-redux'
 import { adicionarAluno } from '../../actions/alunos';
+import axios from 'axios';
 
+const url_base = "http://rest.learncode.academy/api/ufc/alunos";
 
 class CadastroAluno extends Component {
 
     state = {
         nome: "",
         matricula: "",
-    }
+    }    
 
-    constructor(props) {
-        super(props);
-        console.log(props);
-        this.adicionarAluno = props.adicionarAlunoprops;
+    componentDidMount = () =>{     
     }
 
     modificouFormulario = (event) => {
@@ -22,12 +21,14 @@ class CadastroAluno extends Component {
             ...this.state,
             [event.target.id]: event.target.value,
         })
-        console.log(this.state);
     }
 
     submeterFormulario = (event) => {
         event.preventDefault();
-        this.adicionarAluno(this.state.nome, this.state.matricula);
+        this.props.adicionarAlunoprops({
+            nome: this.state.nome,
+            matricula: this.state.matricula,
+        });
         this.setState({
             nome: "",
             matricula: "",
@@ -52,8 +53,8 @@ function mapDispatchToProps(dispatch){
     // dispatch despacha ação para reducer
     // Recebe uma ação
     return {
-        adicionarAlunoprops: (nome, matricula) => {
-            dispatch(adicionarAluno({nome:nome, matricula:matricula}))
+        adicionarAlunoprops: (aluno) => {
+            dispatch(adicionarAluno(aluno))
         }
     };
 }
